@@ -12,40 +12,38 @@ const prezzoKm = 0.21;
 
 const valuta = "€";
 
-let prezzoScontato = "";
+let sconto =0;
 
-let ragioneSconto = "";
+let ragioneSconto = "Lo sapevi che: Se vai allo sportello informazioni puoi richiedere la tua tessera: Trenino Thomas. Grazie a questa tessera noi aquisiremo tutti i tuoi dati e tu in cambio avrai sconti fuffa tipo Black Friday!";
+
 
 // Chiedere all'utente quanti anni ha
 const etaUtente = parseInt(prompt("Quanti anni hai?"));
-console.log("Età Utente", etaUtente);
 
 // Chiedere all'utente quanti chilometri vuole fare
 const distanzaKm = parseInt(prompt("Quanti Km vuoi percorrere?"));
-console.log("Km percorsi", distanzaKm);
+
 // trovare prezzo totale
 const prezzoReale = distanzaKm * prezzoKm;
-console.log("Prezzo Totale", prezzoReale);
 
 // applicare sconto età
-if (etaUtente <= 17){
-    sconto20 = ((prezzoReale * 20) / 100);
-    console.log("Sconto Under 18", sconto20);
+if (etaUtente < 18) {
+    sconto = ((prezzoReale * 20) / 100);
     ragioneSconto = "Hai ricevuto uno sconto del 20% poichè sei minorenne, Beata Gioventù!";
-    prezzoScontato = (prezzoReale - sconto20);
-    console.log("Totale", prezzoScontato);
-} else if (etaUtente >= 65){
-    sconto40 = ((prezzoReale * 40) / 100);
-    console.log("Sconto Over 65", sconto40);
+} else if (etaUtente > 64) {
+    sconto = ((prezzoReale * 40) / 100);
     ragioneSconto = "Hai ricevuto uno sconto del 40% grazie al programma interno: Aiutiamo la seconda Gioventù!";
-    prezzoScontato = (prezzoReale - sconto40);
-    console.log("Totale", prezzoScontato);
-} else (etaUtente > 18||etaUtente < 65)
-    prezzoScontato = prezzoReale;
-    ragioneSconto = "Lo sapevi che: Se vai allo sportello informazioni puoi richiedere la tua tessera: Trenino Thomas. Grazie a questa tessera noi aquisiremo tutti i tuoi dati e tu in cambio avrai sconti fuffa tipo Black Friday!";
+}
 
 // output descrizione del prezzo
 document.getElementById("descrizione").innerHTML = ragioneSconto;
 
 // output prezzo i € con max 2 decimali
-document.getElementById("risultato").innerHTML = valuta + prezzoScontato.toFixed(2);
+document.getElementById("risultato").innerHTML = valuta + (prezzoReale - sconto).toFixed(2);
+
+// DEBUG
+// console.log("Età Utente", etaUtente);
+// console.log("Km percorsi", distanzaKm);
+// console.log("Prezzo Totale", prezzoReale);
+// console.log("Prezzo Scontato", (prezzoReale - sconto));
+// DEBUG
